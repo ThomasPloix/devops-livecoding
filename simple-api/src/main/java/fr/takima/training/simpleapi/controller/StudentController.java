@@ -23,6 +23,7 @@ public class StudentController {
 
     @GetMapping(value = "/")
     public ResponseEntity<Object> getStudents() {
+        System.out.println("getStudents");
         return  ResponseEntity.ok(studentService.getAll());
     }
 
