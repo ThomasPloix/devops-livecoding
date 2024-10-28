@@ -42,6 +42,7 @@ jobs:
 
 
       - name: Build image and push backend
+        if: test-backend.outcome == 'success'
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
