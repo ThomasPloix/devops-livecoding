@@ -28,7 +28,6 @@ jobs:
   # define job to build and publish docker image
   build-and-push-docker-image:
     needs: test-backend
-    if: github.ref == 'refs/heads/main'
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
 
@@ -42,7 +41,7 @@ jobs:
 
 
       - name: Build image and push backend
-        if: test-backend.outcome == 'success'
+        if: github.event.workflow_run.test-backend.conclusion == 'success'
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
