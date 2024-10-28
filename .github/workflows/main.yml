@@ -30,19 +30,17 @@ jobs:
     # run only when code is compiling and tests are passing
     runs-on: ubuntu-22.04
     needs: test-backend
+    if: github.ref == 'refs/heads/main'
     # steps to perform in job
     steps:
       - name: Checkout code
-        if:  ${{always()}}
         uses: actions/checkout@v2.5.0
 
       - name: Login to DockerHub
-        if: ${{always()}}
         run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
 
 
       - name: Build image and push backend
-        if: ${{success()}}
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
@@ -52,8 +50,19 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
+  build-and-push-docker-image-database:
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
+
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
       - name: Build image and push database
-        if: ${{always()}}
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
@@ -63,8 +72,21 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
-      - name: Build image and push httpd
-        if: ${{always()}}
+
+
+  build-and-push-docker-image-http-server:
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
+
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build image and push httpd server
         uses: docker/build-push-action@v3
         with:
           # relative path to the place where source code with Dockerfile is located
