@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'adopt'
+          distribution: 'corretto'
 
       #finally build your app with the latest command
       - name: Build and test with Maven
-        working-directory: /simple-api
+        working-directory: ./simple-api
         run: mvn -B package --file pom.xml
