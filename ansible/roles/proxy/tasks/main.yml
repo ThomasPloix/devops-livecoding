@@ -3,7 +3,7 @@
 - name: Launch Proxy container
   docker_container:
     name: httpd
-    image: tploix/tp-devops-http-server:latest
+    image: tploix/tp-devops-proxy-server:latest
     state: started
     ports:
       - "80:80"
