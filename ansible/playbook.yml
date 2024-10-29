@@ -1,0 +1,24 @@
+- hosts: all
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: Include the Docker role
+      include_role:
+        name: docker
+
+    - name: Docker Network
+      include_role:
+        name: network
+
+    - name : Launch Database
+      include_role:
+        name: database
+
+    - name : Launch App
+      include_role:
+        name: app
+
+    - name: Http server
+      include_role:
+        name: proxy
