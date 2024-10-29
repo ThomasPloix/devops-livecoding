@@ -19,6 +19,7 @@ services:
 
   httpd:
     build: ./devops-front-main
+    container_name: front
     ports:
       - "80:80"
     networks:
