@@ -23,14 +23,11 @@ services:
     networks:
       - my-network
 
-
   front:
     build: ./devops-front-main
     container_name: front
     ports:
       - "80:80"
-    networks:
-      - my-network
     depends_on:
       - backend
 
