@@ -17,7 +17,7 @@ services:
     volumes:
       - db-volume:/var/lib/postgresql/data
 
-  httpd:
+  front:
     build: ./devops-front-main
     container_name: front
     ports:

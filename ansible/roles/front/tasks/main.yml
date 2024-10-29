@@ -2,10 +2,9 @@
 # tasks file for roles/front
 - name: Launch front container
   docker_container:
-    name: front
-    image: tploix/tp-devops-http-server:latest
+    image: tploix/tp-devops-front-server:latest
     state: started
     ports:
-      - "80:80"
+      - "13:13"
     networks:
       - name: my-network
