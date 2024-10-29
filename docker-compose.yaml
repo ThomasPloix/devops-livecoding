@@ -17,6 +17,13 @@ services:
     volumes:
       - db-volume:/var/lib/postgresql/data
 
+  httpd:
+    build: ./http-server
+    container_name: proxy
+    networks:
+      - my-network
+
+
   front:
     build: ./devops-front-main
     container_name: front
