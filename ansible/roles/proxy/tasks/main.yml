@@ -7,8 +7,6 @@
     state: started
     ports:
       - "80:80"
-    networks:
-      - name: my-network
 
   tags: proxy
 
