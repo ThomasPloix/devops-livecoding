@@ -2,13 +2,13 @@
 # tasks file for roles/proxy
 - name: Launch front container
   docker_container:
-    name: my_front_proxy
+    name: httpd
     image: tploix/tp-devops-http-server:latest
     state: started
     ports:
       - "80:80"
     networks:
-      - name: network_app
+      - name: my-network
 
   tags: proxy
 

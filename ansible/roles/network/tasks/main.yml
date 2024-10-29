@@ -2,7 +2,6 @@
 # tasks file for roles/network
 - name: Create a Docker network
   docker_network:
-    name: network_app
+    name: my-network
     driver: bridge
     state: present
-
