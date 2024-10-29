@@ -5,8 +5,6 @@
     name: httpd
     image: tploix/tp-devops-proxy-server:latest
     state: started
-    ports:
-      - "80:80"
     networks:
       - name: my-network
   tags: proxy
