@@ -2,12 +2,12 @@
 # tasks file for roles/app
 - name: Launch application container
   docker_container:
-    name: my_app
+    name: my-api
     image: tploix/tp-devops-simple-api:latest
     state: started
     ports:
       - "8080:8080"
     networks:
-      - name: network_app
+      - name: my-network
 
   tags: app

@@ -2,7 +2,7 @@
 # tasks file for roles/database
 - name: Install and Launch database
   docker_container:
-    name: my_database
+    name: my-db
     image: tploix/tp-devops-database:latest
     env:
       POSTGRES_DB: db
@@ -11,5 +11,5 @@
     ports:
       - "5432:5432"
     networks:
-      - name: network_app
+      - name: my-network
   tags: database
