@@ -13,11 +13,12 @@ RUN apt-get update && \
 # Set the working directory inside the container
 WORKDIR /ansible
 
-# Copy your Ansible playbooks, inventories, and other configurations into the container
-COPY . .
+# Copy all contents in the /ansible directory (including inventories, roles, playbooks)
+COPY . /ansible
 
 # Set environment variables, if needed
 ENV ANSIBLE_HOST_KEY_CHECKING=False
 
-# Run Ansible command by default (adjust based on your needs)
+# Default entrypoint for running Ansible commands
 ENTRYPOINT ["ansible-playbook"]
+CMD ["playbook.yml", "-i", "inventories/setup.yml"]
