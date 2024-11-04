@@ -136,5 +136,14 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
-      - name: Launch Server
-        run: ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
+      - name: Run Ansible Playbook in Docker
+
+        run: |
+          docker run --rm \
+            -v "$PWD":/ansible/playbooks \
+            -v ~/.ssh:/root/.ssh \
+            my-ansible-image:latest \
+            ansible-playbook /ansible/playbooks/playbook.yml -i /ansible/playbooks/inventories/setup.yml
+
+      - name: Clean up SSH key
+        run: rm -f ~/.ssh/id_rsa
