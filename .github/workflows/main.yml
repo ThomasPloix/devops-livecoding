@@ -119,6 +119,30 @@ jobs:
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
 
+
+
+  build-and-push-docker-ansible:
+    # run only when code is compiling and tests are passing
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    # steps to perform in job
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
+
+      - name: Login to DockerHub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: push ansible server
+        uses: docker/push-action@v2
+        with:
+          # relative path to the place where source code with Dockerfile is located
+          context: ./ansible
+          # Note: tags has to be all lower-case
+          tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-ansible:latest
+          # build on feature branches, push only on main branch
+          push: ${{ github.ref == 'refs/heads/main' }}
+
   deploy:
     runs-on: ubuntu-22.04
     if: github.ref == 'refs/heads/main'
@@ -139,7 +163,10 @@ jobs:
       - name: Run Ansible Playbook in Docker
         run: |
           docker run --rm \
-            ansible-playbook /ansible/playbooks/playbook.yml -i /ansible/playbooks/inventories/setup.yml
+            -v "$PWD":/ansible/playbooks \
+            -v ~/.ssh:/root/.ssh \
+            tp-devops-ansible:latest \
+            ansible-playbook /ansible/playbook.yml -i /ansible/inventories/setup.yml
 
       - name: Clean up SSH key
         run: rm -f ~/.ssh/id_rsa
