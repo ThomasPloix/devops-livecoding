@@ -166,7 +166,7 @@ jobs:
             -v "$PWD":/ansible/playbooks \
             -v ~/.ssh:/root/.ssh \
             tploix/tp-devops-ansible:latest \
-            ansible-playbook /ansible/playbook.yml -i /ansible/inventories/setup.yml
+            playbook.yml -i /inventories/setup.yml
 
       - name: Clean up SSH key
         run: rm -f ~/.ssh/id_rsa
