@@ -131,7 +131,7 @@ jobs:
       - name: Set up SSH
         uses: webfactory/ssh-agent@v0.5.3
         env:
-          SSH_KEY: ${{ secrets.SECRET_ID_RSA }}
+          ssh-private-key: ${{ secrets.SECRET_ID_RSA }}
 
       - name: Run Ansible Playbook in Docker
         run: |
