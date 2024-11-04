@@ -129,4 +129,6 @@ jobs:
         uses: actions/checkout@v2.5.0
 
       - name: Launch Server
-        run: ansible-playbook -i ansible/inventories/setup.yml playbook.yml
+        with:
+          context: ./ansible
+        run: ansible-playbook -i inventories/setup.yml playbook.yml
