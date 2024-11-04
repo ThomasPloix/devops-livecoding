@@ -4,6 +4,7 @@
   docker_container:
     name: my-db
     image: tploix/tp-devops-database:latest
+    pull: always
     env:
       POSTGRES_DB: db
       POSTGRES_USER: user

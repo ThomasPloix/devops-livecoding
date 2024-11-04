@@ -4,6 +4,7 @@
   docker_container:
     name: httpd
     image: tploix/tp-devops-proxy-server:latest
+    pull: always
     state: started
     networks:
       - name: my-network

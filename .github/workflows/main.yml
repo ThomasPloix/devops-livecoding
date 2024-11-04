@@ -118,3 +118,15 @@ jobs:
           tags: ${{secrets.DOCKERHUB_USERNAME}}/tp-devops-front-server:latest
           # build on feature branches, push only on main branch
           push: ${{ github.ref == 'refs/heads/main' }}
+
+  deploy:
+    runs-on: ubuntu-22.04
+    if: github.ref == 'refs/heads/main'
+    needs: [build-and-push-docker-image, build-and-push-docker-image-database, build-and-push-docker-image-proxy-server, build-and-push-docker-image-front-server]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2.5.0
+
+      - name: Launch Server
+        run: ansible-playbook -i ansible/inventories/setup.yml playbook.yml

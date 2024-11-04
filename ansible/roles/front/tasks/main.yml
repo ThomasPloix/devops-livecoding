@@ -4,6 +4,7 @@
   docker_container:
     name: front
     image: tploix/tp-devops-front-server:latest
+    pull: always
     ports:
       - "80:80"
     state: started
