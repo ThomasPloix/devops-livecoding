@@ -165,7 +165,7 @@ jobs:
           docker run --rm \
             -v "$PWD":/ansible/playbooks \
             -v ~/.ssh:/root/.ssh \
-            tp-devops-ansible:latest \
+            tploix/tp-devops-ansible:latest \
             ansible-playbook /ansible/playbook.yml -i /ansible/inventories/setup.yml
 
       - name: Clean up SSH key
