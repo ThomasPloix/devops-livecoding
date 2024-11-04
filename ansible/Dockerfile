@@ -14,7 +14,7 @@ RUN apt-get update && \
 WORKDIR /ansible
 
 # Copy your Ansible playbooks, inventories, and other configurations into the container
-COPY . /ansible
+COPY . .
 
 # Set environment variables, if needed
 ENV ANSIBLE_HOST_KEY_CHECKING=False
