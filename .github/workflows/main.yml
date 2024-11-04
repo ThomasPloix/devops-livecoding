@@ -128,6 +128,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2.5.0
 
-      - name: Launch Server
+      - name: Set up SSH
+        env:
+          SSH_KEY: ${{ secrets.SECRET_ID_RSA }}
+        run: |
+          echo "$SSH_KEY" | base64 -d > ~/.ssh/id_rsa
+          chmod 400 ~/.ssh/id_rsa
+          echo -e "Host *\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
 
+      - name: Launch Server
         run: ansible-playbook -i ansible/inventories/setup.yml ansible/playbook.yml
